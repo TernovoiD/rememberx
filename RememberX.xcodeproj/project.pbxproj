@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		813B10FC2A2A4B62001F6C57 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813B10FB2A2A4B62001F6C57 /* EventsViewController.swift */; };
+		813B11022A2A4CC7001F6C57 /* AuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813B11012A2A4CC7001F6C57 /* AuthHeaderView.swift */; };
+		813B11042A2A5A4B001F6C57 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813B11032A2A5A4B001F6C57 /* CustomTextField.swift */; };
+		814E88172A2B28DC00B37CD0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E88162A2B28DC00B37CD0 /* CustomButton.swift */; };
+		814E88192A2B2C4500B37CD0 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E88182A2B2C4500B37CD0 /* PasswordResetViewController.swift */; };
+		814E881B2A2B2C8A00B37CD0 /* AccountRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E881A2A2B2C8A00B37CD0 /* AccountRegisterViewController.swift */; };
+		814E881D2A2B2C9E00B37CD0 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E881C2A2B2C9E00B37CD0 /* AuthenticationViewController.swift */; };
 		81A2622C2A288BDB0099A15B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2622B2A288BDB0099A15B /* AppDelegate.swift */; };
 		81A2622E2A288BDB0099A15B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2622D2A288BDB0099A15B /* SceneDelegate.swift */; };
-		81A262302A288BDB0099A15B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2622F2A288BDB0099A15B /* ViewController.swift */; };
 		81A262352A288BDC0099A15B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81A262342A288BDC0099A15B /* Assets.xcassets */; };
 		81A262382A288BDC0099A15B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A262362A288BDC0099A15B /* LaunchScreen.storyboard */; };
 		81A262452A2890350099A15B /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A262442A2890350099A15B /* AuthenticationViewModel.swift */; };
@@ -22,14 +28,19 @@
 		81A262582A28B7D60099A15B /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A262572A28B7D60099A15B /* HTTPManager.swift */; };
 		81A2625A2A28B9050099A15B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A262592A28B9050099A15B /* Constants.swift */; };
 		81A2625C2A28BDCA0099A15B /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2625B2A28BDCA0099A15B /* AuthorizationManager.swift */; };
-		81A2625E2A28C1830099A15B /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2625D2A28C1830099A15B /* AuthenticationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		813B10FB2A2A4B62001F6C57 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		813B11012A2A4CC7001F6C57 /* AuthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeaderView.swift; sourceTree = "<group>"; };
+		813B11032A2A5A4B001F6C57 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		814E88162A2B28DC00B37CD0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		814E88182A2B2C4500B37CD0 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
+		814E881A2A2B2C8A00B37CD0 /* AccountRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRegisterViewController.swift; sourceTree = "<group>"; };
+		814E881C2A2B2C9E00B37CD0 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		81A262282A288BDB0099A15B /* RememberX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememberX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A2622B2A288BDB0099A15B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81A2622D2A288BDB0099A15B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		81A2622F2A288BDB0099A15B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		81A262342A288BDC0099A15B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81A262372A288BDC0099A15B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81A262392A288BDC0099A15B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -43,7 +54,6 @@
 		81A262572A28B7D60099A15B /* HTTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
 		81A262592A28B9050099A15B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		81A2625B2A28BDCA0099A15B /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
-		81A2625D2A28C1830099A15B /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +67,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		813B10FF2A2A4BBC001F6C57 /* CustomElements */ = {
+			isa = PBXGroup;
+			children = (
+				813B11012A2A4CC7001F6C57 /* AuthHeaderView.swift */,
+				813B11032A2A5A4B001F6C57 /* CustomTextField.swift */,
+				814E88162A2B28DC00B37CD0 /* CustomButton.swift */,
+			);
+			path = CustomElements;
+			sourceTree = "<group>";
+		};
+		813B11002A2A4BDA001F6C57 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		814E881E2A2B2CC800B37CD0 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				814E881C2A2B2C9E00B37CD0 /* AuthenticationViewController.swift */,
+				814E881A2A2B2C8A00B37CD0 /* AccountRegisterViewController.swift */,
+				814E88182A2B2C4500B37CD0 /* PasswordResetViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		81A2621F2A288BDB0099A15B = {
 			isa = PBXGroup;
 			children = (
@@ -121,8 +158,8 @@
 		81A262422A288EF60099A15B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				81A2622F2A288BDB0099A15B /* ViewController.swift */,
-				81A2625D2A28C1830099A15B /* AuthenticationViewController.swift */,
+				813B10FB2A2A4B62001F6C57 /* EventsViewController.swift */,
+				814E881E2A2B2CC800B37CD0 /* Authentication */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -130,6 +167,8 @@
 		81A262432A288EFE0099A15B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				813B11002A2A4BDA001F6C57 /* Authentication */,
+				813B10FF2A2A4BBC001F6C57 /* CustomElements */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,17 +255,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				81A262522A28953B0099A15B /* ServerManager.swift in Sources */,
+				814E88192A2B2C4500B37CD0 /* PasswordResetViewController.swift in Sources */,
 				81A262562A28AFEE0099A15B /* DataManager.swift in Sources */,
 				81A262472A2891420099A15B /* EventsViewModel.swift in Sources */,
 				81A2624B2A28918A0099A15B /* UserModel.swift in Sources */,
+				813B11042A2A5A4B001F6C57 /* CustomTextField.swift in Sources */,
+				814E881B2A2B2C8A00B37CD0 /* AccountRegisterViewController.swift in Sources */,
 				81A262452A2890350099A15B /* AuthenticationViewModel.swift in Sources */,
-				81A262302A288BDB0099A15B /* ViewController.swift in Sources */,
+				813B11022A2A4CC7001F6C57 /* AuthHeaderView.swift in Sources */,
 				81A2625C2A28BDCA0099A15B /* AuthorizationManager.swift in Sources */,
 				81A262542A2896140099A15B /* CollectionModel.swift in Sources */,
+				814E881D2A2B2C9E00B37CD0 /* AuthenticationViewController.swift in Sources */,
 				81A2622C2A288BDB0099A15B /* AppDelegate.swift in Sources */,
 				81A262582A28B7D60099A15B /* HTTPManager.swift in Sources */,
-				81A2625E2A28C1830099A15B /* AuthenticationViewController.swift in Sources */,
 				81A262492A28917D0099A15B /* EventModel.swift in Sources */,
+				814E88172A2B28DC00B37CD0 /* CustomButton.swift in Sources */,
+				813B10FC2A2A4B62001F6C57 /* EventsViewController.swift in Sources */,
 				81A2622E2A288BDB0099A15B /* SceneDelegate.swift in Sources */,
 				81A2625A2A28B9050099A15B /* Constants.swift in Sources */,
 			);
@@ -296,7 +340,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -350,7 +394,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -376,7 +420,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -409,7 +453,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
