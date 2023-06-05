@@ -13,6 +13,7 @@ class AccountRegisterViewController: UIViewController {
     
     // MARK: - Variables
     
+    let authViewModel: AuthenticationViewModel
     
     
     // MARK: -  UI components
@@ -27,6 +28,15 @@ class AccountRegisterViewController: UIViewController {
     
     
     // MARK: -  Lifecycle
+    
+    init(authViewModel: AuthenticationViewModel) {
+        self.authViewModel = authViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +62,7 @@ class AccountRegisterViewController: UIViewController {
         self.view.addSubview(signInButton)
         
         signInButton.addTarget(self, action: #selector(signInButtonDidTap), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(didTapRegisterButton), for: .touchUpInside)
         
         
         NSLayoutConstraint.activate([
@@ -101,6 +112,21 @@ class AccountRegisterViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
-
+    @objc func didTapRegisterButton() {
+        guard let username = usernameField.text,
+              let userEmail = userEmailField.text,
+              let userPassword = userPasswordField.text,
+              let userPasswordRepeat = userPasswordRepearField.text else { return }
+        Task {
+            do {
+                let user = try await authViewModel.createUser(withUsername: username,
+                                                              andEmail: userEmail,
+                                                              andPassword: userPassword,
+                                                              andPasswordRepeat: userPasswordRepeat)
+                print(user)
+            } catch {
+                print("Error: No response")
+            }
+        }
+    }
 }

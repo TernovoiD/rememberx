@@ -16,6 +16,14 @@ enum HTTPHeaders: String {
     case authorization = "Authorization"
 }
 
+enum HTTPMethods: String {
+    case POST, GET, PUT, PATCH, DELETE
+}
+
+enum HTTPError: Error {
+    case badURL, badResponse, notFound, notDecodable
+}
+
 class HTTPManager {
     func sendRequest(toURL url: URL,
                      withData data: Data? = nil,

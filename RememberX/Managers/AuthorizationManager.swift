@@ -19,9 +19,8 @@ class AuthorizationManager {
         return userDefaults.string(forKey: "userToken")
     }
     
-    func createBasicAuthorization(login: String, password: String) -> String {
-        let loginString = String(format: "%@:%@", login, password)
-        let loginData = loginString.data(using: String.Encoding.utf8)!
-        return loginData.base64EncodedString()
+    func deleteToken() {
+        let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: "userToken")
     }
 }
