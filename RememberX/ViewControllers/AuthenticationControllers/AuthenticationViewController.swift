@@ -11,8 +11,7 @@ class AuthenticationViewController: UIViewController {
     
     // MARK: - Variables
     
-    
-    
+    let authViewModel: AuthenticationViewModel
     
     
     // MARK: -  UI components
@@ -26,6 +25,15 @@ class AuthenticationViewController: UIViewController {
     
     
     // MARK: -  Lifecycle
+    
+    init(authViewModel: AuthenticationViewModel) {
+        self.authViewModel = authViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +56,7 @@ class AuthenticationViewController: UIViewController {
         self.view.addSubview(createNewAccountButton)
         self.view.addSubview(forgotPasswordButton)
         
-        signInButton.addTarget(self, action: #selector(backgroundTapped), for: .touchUpInside)
+        signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         createNewAccountButton.addTarget(self, action: #selector(createNewAccountButtonDidTap), for: .touchUpInside)
         forgotPasswordButton.addTarget(self, action: #selector(resetPasswordButtonDidTap), for: .touchUpInside)
         
@@ -89,11 +97,26 @@ class AuthenticationViewController: UIViewController {
     }
     
     @objc func createNewAccountButtonDidTap() {
-        self.navigationController?.pushViewController(AccountRegisterViewController(), animated: true)
+        self.navigationController?.pushViewController(AccountRegisterViewController(authViewModel: authViewModel), animated: true)
     }
     
     @objc func resetPasswordButtonDidTap() {
         self.navigationController?.pushViewController(PasswordResetViewController(), animated: true)
+    }
+    
+    @objc func signIn() {
+        guard let userEmail = userEmailField.text,
+              let userPassword = userPasswordField.text else {
+            print("Error: fields are empty")
+            return
+        }
+        Task {
+            do {
+                try await authViewModel.loginUser(withEmail: userEmail, andPassword: userPassword)
+            } catch let error {
+                print("Error: \(error)")
+            }
+        }
     }
     
 }

@@ -9,4 +9,13 @@ import Foundation
 
 class EventsViewModel {
     
+    let authService: AuthenticationService
+    
+    init(authService: AuthenticationService) {
+        self.authService = authService
+    }
+    
+    func signOut() {
+        authService.signOut()
+    }
 }
