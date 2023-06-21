@@ -21,7 +21,7 @@ enum HTTPMethods: String {
 }
 
 enum HTTPError: Error {
-    case badURL, badResponse, notFound, notDecodable
+    case badURL, badResponse, notFound, notDecodable, notAuthorized
 }
 
 class HTTPManager {

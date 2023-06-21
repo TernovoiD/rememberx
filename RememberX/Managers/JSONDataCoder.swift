@@ -9,7 +9,7 @@ import Foundation
 
 class JSONDataCoder {
     
-    let dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    private let dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
     
     func encodeItemToData<T: Codable>(item: T) throws -> Data {
         let encoder = JSONEncoder()

@@ -14,13 +14,15 @@ class MainTabBarViewController: UITabBarController {
     
     private var cancellables = Set<AnyCancellable>()
     let authenticationService: AuthenticationService
+    let collectionsService: CollectionsService
     var authenticationNavigationController: UINavigationController? = nil
     
     
     // MARK: -  Lifecycle
     
-    init(authenticationService: AuthenticationService) {
+    init(authenticationService: AuthenticationService, collectionsService: CollectionsService) {
         self.authenticationService = authenticationService
+        self.collectionsService = collectionsService
         super.init(nibName: nil, bundle: nil)
         setupBindings()
     }
@@ -33,23 +35,51 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         // Initialize view models
-        let eventsViewModel = EventsViewModel(authService: authenticationService)
+        let authenticationViewModel = AuthenticationViewModel(authenticationService: authenticationService)
+        let eventsViewModel = EventsViewModel(authService: authenticationService, collectionsService: collectionsService)
+        let collectionsViewModel = CollectionsViewModel(authService: authenticationService, collectionsService: collectionsService)
+        
+        // Initialize TabBarItems
+        
+        let collectionsTabBarItem = UITabBarItem(title: "Collections",
+                                                 image: UIImage(systemName: "folder"),
+                                                 selectedImage: UIImage(systemName: "folder.fill"))
+        
+        let upcomingTabBarItem = UITabBarItem(title: "Upcoming",
+                                              image: UIImage(systemName: "calendar"),
+                                              selectedImage: UIImage(systemName: "calendar.fill"))
+        
+        let profileTabBarItem = UITabBarItem(title: "Profile",
+                                             image: UIImage(systemName: "person"),
+                                             selectedImage: UIImage(systemName: "person.fill"))
         
         // Initialize view controllers
+        let profileViewController = ProfileViewController(viewModel: authenticationViewModel)
+        let collectionsViewController = CollectionsViewController(collectionsViewModel: collectionsViewModel, eventsViewModel: eventsViewModel)
         let eventsViewController = EventsViewController(eventsViewModel: eventsViewModel)
-        setViewControllers([eventsViewController], animated: true)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        checkUserAuthenticationStatus()
+        let upcomingViewController = UpcomingViewController(eventsViewModel: eventsViewModel)
+        
+        // Set TabBarItems
+        profileViewController.tabBarItem = profileTabBarItem
+        collectionsViewController.tabBarItem = collectionsTabBarItem
+        upcomingViewController.tabBarItem = upcomingTabBarItem
+        eventsViewController.tabBarItem = upcomingTabBarItem
+        
+        
+        // Initialize navigation controllers
+        let profileNC = UINavigationController(rootViewController: profileViewController)
+        let collectionsNC = UINavigationController(rootViewController: collectionsViewController)
+        let upcomingNC = UINavigationController(rootViewController: upcomingViewController)
+        let eventsNC = UINavigationController(rootViewController: eventsViewController)
+        
+        self.viewControllers = [collectionsNC, eventsNC, profileNC]
     }
     
     
     // MARK: - Functions
     
     private func setupBindings() {
-        authenticationService.$isUserAuthenticated
+        authenticationService.$authenticatedUser
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 self.checkUserAuthenticationStatus()
@@ -58,10 +88,17 @@ class MainTabBarViewController: UITabBarController {
     }
     
     private func checkUserAuthenticationStatus() {
-        if authenticationService.isUserAuthenticated == false {
+        if authenticationService.authenticatedUser == nil {
             showAuthenticationViewController()
         } else {
             hideAuthenticationViewController()
+            Task {
+                do {
+                    try await collectionsService.fetchUserCollections()
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
     
