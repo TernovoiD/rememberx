@@ -8,15 +8,28 @@
 import Foundation
 
 struct UserModel: Codable {
-    let id: String
-    let username: String
-    let updatedAt: Date
-    let createdAt: Date
+    let id: String?
+    let username: String?
+    let updatedAt: Date?
+    let createdAt: Date?
+    let email: String?
+    let password: String?
+    let confirmPassword: String?
     
-    init(id: String, username: String, updatedAt: Date, createdAt: Date) {
+    init(id: String? = nil,
+         username: String? = nil,
+         updatedAt: Date? = nil,
+         createdAt: Date? = nil,
+         email: String? = nil,
+         password: String? = nil,
+         confirmPassword: String? = nil) {
         self.id = id
         self.username = username
         self.updatedAt = updatedAt
         self.createdAt = createdAt
+        self.email = email
+        self.password = password
+        self.confirmPassword = confirmPassword
     }
+    
 }

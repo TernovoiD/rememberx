@@ -13,6 +13,7 @@ class CustomTextField: UITextField {
         case username
         case email
         case password
+        case title
     }
     
     private let fieldType: CustomTextFieldType
@@ -26,7 +27,7 @@ class CustomTextField: UITextField {
         self.layer.cornerRadius = 10
         self.returnKeyType = .done
         self.autocorrectionType = .no
-        self.autocapitalizationType = .none
+        self.autocapitalizationType = fieldType == .title ? .sentences : .none
         self.isSecureTextEntry = fieldType == .password ? true : false
         self.keyboardType = fieldType == .email ? .emailAddress : .default
         self.leftViewMode = .always
@@ -39,6 +40,8 @@ class CustomTextField: UITextField {
             self.placeholder = "Email"
         case .password:
             self.placeholder = "Password"
+        case .title:
+            self.placeholder = "Title"
         }
     }
     

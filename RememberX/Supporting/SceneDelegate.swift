@@ -25,9 +25,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Initialize services
         let authService = AuthenticationService(authManager: authManager, httpManager: httpManager, dataCoder: dataCoder)
+        let collectionsService = CollectionsService(authManager: authManager, httpManager: httpManager, dataCoder: dataCoder)
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = MainTabBarViewController(authenticationService: authService)
+        window?.rootViewController = MainTabBarViewController(authenticationService: authService, collectionsService: collectionsService)
         window?.makeKeyAndVisible()
     }
 
