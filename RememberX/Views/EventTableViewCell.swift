@@ -18,25 +18,12 @@ class EventTableViewCell: UITableViewCell {
     
     // MARK: -  UI components
     
-    private var daysToEventLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .systemGray4
-        label.layer.cornerRadius = 10
-        label.layer.masksToBounds = true
-        label.textColor = .white
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 36, weight: .bold)
-        label.text = "00x99"
-        return label
-    }()
-    
     private var eventLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 20, weight: .regular)
         label.text = "Error"
         return label
     }()
@@ -52,34 +39,60 @@ class EventTableViewCell: UITableViewCell {
         return label
     }()
     
+    private var collectionNameTag: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.textAlignment = .center
+        label.numberOfLines = 1
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.text = "Error"
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        label.backgroundColor = .systemGray2
+        return label
+    }()
+    
     
     // MARK: -  UI Setup
     
     func configure(event: EventModel) {
-        daysToEventLabel.text = "123"
+        
+        let encounter = DaysEncounterStackView(daysToShow: event.daysTo, textToShow: event.daysToDescription)
+        addSubview(eventLabel)
+        addSubview(collectionNameTag)
+        addSubview(infoLabel)
+        addSubview(encounter)
+        
         eventLabel.text = event.title
         infoLabel.text = event.information
         
+        if let text = event.collectionName {
+            collectionNameTag.text = " " + text
+        } else {
+            collectionNameTag.text = ""
+        }
         
-        addSubview(daysToEventLabel)
-        addSubview(eventLabel)
-        addSubview(infoLabel)
         
         NSLayoutConstraint.activate([
-            
-            daysToEventLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            daysToEventLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            daysToEventLabel.heightAnchor.constraint(equalToConstant: 70),
-            daysToEventLabel.widthAnchor.constraint(equalToConstant: 80),
+            encounter.centerYAnchor.constraint(equalTo: centerYAnchor),
+            encounter.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            encounter.heightAnchor.constraint(equalToConstant: 70),
+            encounter.widthAnchor.constraint(equalToConstant: 80),
             
             eventLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            eventLabel.leadingAnchor.constraint(equalTo: daysToEventLabel.trailingAnchor, constant: 16),
-            eventLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            eventLabel.leadingAnchor.constraint(equalTo: encounter.trailingAnchor, constant: 16),
+            eventLabel.trailingAnchor.constraint(equalTo: collectionNameTag.leadingAnchor, constant: -10),
             
-            infoLabel.topAnchor.constraint(equalTo: eventLabel.bottomAnchor),
+            collectionNameTag.centerYAnchor.constraint(equalTo: eventLabel.centerYAnchor),
+//            collectionNameTag.widthAnchor.constraint(lessThanOrEqualToConstant: 80),
+//            collectionNameTag.widthAnchor.constraint(greaterThanOrEqualToConstant: 60),
+            collectionNameTag.widthAnchor.constraint(equalToConstant: 70),
+            collectionNameTag.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
+            infoLabel.topAnchor.constraint(equalTo: eventLabel.bottomAnchor, constant: 2),
             infoLabel.leadingAnchor.constraint(equalTo: eventLabel.leadingAnchor),
-            infoLabel.trailingAnchor.constraint(equalTo: eventLabel.trailingAnchor),
+            infoLabel.trailingAnchor.constraint(equalTo: collectionNameTag.trailingAnchor),
         ])
     }
     

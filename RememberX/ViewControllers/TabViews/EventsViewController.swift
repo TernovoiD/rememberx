@@ -39,6 +39,17 @@ class EventsViewController: UIViewController {
         return barButtonItem
     }()
     
+    private let label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .label
+        label.textAlignment = .center
+        label.backgroundColor = .systemGray5
+        label.font = .systemFont(ofSize: 24, weight: .regular)
+        label.text = "Error"
+        return label
+    }()
+    
     
     // MARK: -  Lifecycle
     
@@ -83,18 +94,34 @@ class EventsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         eventsTableView.separatorInset = UIEdgeInsets(top: 0, left: 105, bottom: 0, right: 0)
         
-        NSLayoutConstraint.activate([
-            eventsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            eventsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            eventsTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            eventsTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-        ])
+        if collection == nil {
+            NSLayoutConstraint.activate([
+                eventsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                eventsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                eventsTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                eventsTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            ])
+        } else {
+            self.view.addSubview(label)
+            NSLayoutConstraint.activate([
+                eventsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                eventsTableView.bottomAnchor.constraint(equalTo: label.topAnchor),
+                eventsTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                eventsTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                
+                label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                label.heightAnchor.constraint(equalToConstant: 50),
+            ])
+        }
+        
     }
     
     private func reloadCollection() {
         collection = viewModel.updateCollection(byID: collection?.id)
         if let events = collection?.events {
-            self.collectionEvents = events
+            self.collectionEvents = events.sorted(by: { $0.daysTo < $1.daysTo })
         }
     }
     
@@ -137,16 +164,20 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let event = collection == nil ? viewModel.upcomingEvents[indexPath.row] : collectionEvents[indexPath.row]
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (myContext, myView, complete) in
-            Task {
-                do {
-                    try await self.viewModel.deleteEvent(event, fromCollection: self.collection)
-                } catch let error {
-                    print(error)
+        
+        if event.collectionName == nil {
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (myContext, myView, complete) in
+                Task {
+                    do {
+                        try await self.viewModel.deleteEvent(event, fromCollection: self.collection)
+                    } catch let error {
+                        print(error)
+                    }
                 }
             }
+            return UISwipeActionsConfiguration(actions: [deleteAction])
+        } else {
+            return nil
         }
-        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-    
 }

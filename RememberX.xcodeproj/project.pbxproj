@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81103E2F2A4866F500BD51D9 /* DaysEncounterStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81103E2E2A4866F500BD51D9 /* DaysEncounterStackView.swift */; };
 		813B11022A2A4CC7001F6C57 /* AuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813B11012A2A4CC7001F6C57 /* AuthHeaderView.swift */; };
 		813B11042A2A5A4B001F6C57 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813B11032A2A5A4B001F6C57 /* CustomTextField.swift */; };
 		814E88172A2B28DC00B37CD0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E88162A2B28DC00B37CD0 /* CustomButton.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		81103E2E2A4866F500BD51D9 /* DaysEncounterStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysEncounterStackView.swift; sourceTree = "<group>"; };
 		813B11012A2A4CC7001F6C57 /* AuthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeaderView.swift; sourceTree = "<group>"; };
 		813B11032A2A5A4B001F6C57 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		814E88162A2B28DC00B37CD0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				813B11012A2A4CC7001F6C57 /* AuthHeaderView.swift */,
 				813B11032A2A5A4B001F6C57 /* CustomTextField.swift */,
 				814E88162A2B28DC00B37CD0 /* CustomButton.swift */,
+				81103E2E2A4866F500BD51D9 /* DaysEncounterStackView.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				816D54A52A3873F400A487A1 /* EventTableViewCell.swift in Sources */,
 				81A262472A2891420099A15B /* EventsViewModel.swift in Sources */,
 				81A2624B2A28918A0099A15B /* UserModel.swift in Sources */,
+				81103E2F2A4866F500BD51D9 /* DaysEncounterStackView.swift in Sources */,
 				813B11042A2A5A4B001F6C57 /* CustomTextField.swift in Sources */,
 				816DFB3D2A4099EC007639AA /* AddUpdateCollectionViewController.swift in Sources */,
 				814E881B2A2B2C8A00B37CD0 /* AccountRegisterViewController.swift in Sources */,
