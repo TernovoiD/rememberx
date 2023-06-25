@@ -57,19 +57,16 @@ class MainTabBarViewController: UITabBarController {
         let profileViewController = ProfileViewController(viewModel: authenticationViewModel)
         let collectionsViewController = CollectionsViewController(collectionsViewModel: collectionsViewModel, eventsViewModel: eventsViewModel)
         let eventsViewController = EventsViewController(eventsViewModel: eventsViewModel)
-        let upcomingViewController = UpcomingViewController(eventsViewModel: eventsViewModel)
         
         // Set TabBarItems
         profileViewController.tabBarItem = profileTabBarItem
         collectionsViewController.tabBarItem = collectionsTabBarItem
-        upcomingViewController.tabBarItem = upcomingTabBarItem
         eventsViewController.tabBarItem = upcomingTabBarItem
         
         
         // Initialize navigation controllers
         let profileNC = UINavigationController(rootViewController: profileViewController)
         let collectionsNC = UINavigationController(rootViewController: collectionsViewController)
-        let upcomingNC = UINavigationController(rootViewController: upcomingViewController)
         let eventsNC = UINavigationController(rootViewController: eventsViewController)
         
         self.viewControllers = [collectionsNC, eventsNC, profileNC]

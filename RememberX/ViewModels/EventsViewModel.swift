@@ -36,7 +36,7 @@ class EventsViewModel {
     
     func createEvent(inCollection collection: CollectionModel? = nil, withTitle title: String, andInformation information: String? = nil, andDate date: Date) async throws {
         let collectionID = collection == nil ? collectionsService.userDefaultCollectionID : collection?.id
-        try await collectionsService.createEvent(withTitle: title, andInformation: information, andTimer: .yearly, andDateTime: date, inCollectionWithID: collectionID)
+        try await collectionsService.createEvent(withTitle: title, andInformation: information, andType: .event, andDateTime: date, inCollectionWithID: collectionID)
     }
     
     func deleteEvent(_ event: EventModel, fromCollection collection: CollectionModel? = nil) async throws {
@@ -61,10 +61,9 @@ class EventsViewModel {
     func organizeEvents(from collections: [CollectionModel]) -> [EventModel] {
         var events: [EventModel] = []
         for collection in collections {
-            if let collectionEvents =  collection.events {
-                events.append(contentsOf: collectionEvents)
-            }
+            events.append(contentsOf: collection.returnEventsWithCollectionName())
         }
-        return events
+        let sortedEvents = events.sorted(by: { $0.daysTo < $1.daysTo })
+        return sortedEvents
     }
 }

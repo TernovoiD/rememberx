@@ -47,6 +47,7 @@ extension CollectionsService {
         
         let newCollection = CollectionModel(id: nil,
                                             title: title,
+                                            information: nil,
                                             image: nil,
                                             type: type.rawValue,
                                             updatedAt: nil,
@@ -74,12 +75,12 @@ extension CollectionsService {
 
 extension CollectionsService {
     
-    func createEvent(withTitle title: String, andInformation information: String? = nil, andTimer timer: TimerEnum, andDateTime datetime: Date, inCollectionWithID collectionID: String? = nil) async throws {
+    func createEvent(withTitle title: String, andInformation information: String? = nil, andType type: EventType, andDateTime datetime: Date, inCollectionWithID collectionID: String? = nil) async throws {
         guard let userToken = authManager.getToken() else { throw HTTPError.notAuthorized }
         guard let url = URL(string: BaseRoutes.baseURL + Endpoints.collections + "/" + (collectionID ?? "") + Endpoints.userEvents) else { throw HTTPError.badURL }
         let newEvent = EventModel(title: title,
                                   information: information,
-                                  timer: timer.rawValue,
+                                  type: type.rawValue,
                                   dateTime: datetime)
         let encodedEventData = try dataCoder.encodeItemToData(item: newEvent)
         let (data, _) = try await httpManager.sendRequest(toURL: url, withData: encodedEventData, withHTTPMethod: HTTPMethods.POST.rawValue, withloginToken: userToken)

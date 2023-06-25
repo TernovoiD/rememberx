@@ -24,7 +24,7 @@ class CollectionsViewController: UIViewController {
     private var collectionsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.rowHeight = 80
+        tableView.rowHeight = 60
         tableView.register(CollectionTableViewCell.self, forCellReuseIdentifier: CollectionTableViewCell.cellID)
         return tableView
     }()
@@ -67,7 +67,7 @@ class CollectionsViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
             navigationController?.navigationBar.topItem?.rightBarButtonItem = createCollectionBarButtonItem
         view.backgroundColor = .systemBackground
-        collectionsTableView.separatorInset = UIEdgeInsets(top: 0, left: 105, bottom: 0, right: 0)
+        collectionsTableView.separatorInset = UIEdgeInsets(top: 0, left: 87, bottom: 0, right: 0)
         
         collectionsTableView.dataSource = self
         collectionsTableView.delegate = self
