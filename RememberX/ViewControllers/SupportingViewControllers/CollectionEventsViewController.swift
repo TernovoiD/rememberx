@@ -1,15 +1,14 @@
 //
-//  EventsViewController.swift
+//  CollectionEventsViewController.swift
 //  RememberX
 //
-//  Created by Danylo Ternovoi on 20.06.2023.
+//  Created by Danylo Ternovoi on 27.06.2023.
 //
 
 import UIKit
 import Combine
 
-class EventsViewController: UIViewController {
-    
+class CollectionEventsViewController: UIViewController {
     
     
     // MARK: - Variables
@@ -26,8 +25,8 @@ class EventsViewController: UIViewController {
     private var eventsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.rowHeight = 80
-        tableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCell.cellID)
+        tableView.rowHeight = 70
+        tableView.register(CollectionEventTableViewCell.self, forCellReuseIdentifier: CollectionEventTableViewCell.cellID)
         return tableView
     }()
     
@@ -92,7 +91,6 @@ class EventsViewController: UIViewController {
         eventsTableView.delegate = self
         
         view.backgroundColor = .systemBackground
-        eventsTableView.separatorInset = UIEdgeInsets(top: 0, left: 105, bottom: 0, right: 0)
         
         if collection == nil {
             NSLayoutConstraint.activate([
@@ -145,7 +143,7 @@ class EventsViewController: UIViewController {
     }
 }
 
-extension EventsViewController: UITableViewDelegate, UITableViewDataSource {
+extension CollectionEventsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if collection != nil {
             return collectionEvents.count
@@ -155,7 +153,7 @@ extension EventsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = eventsTableView.dequeueReusableCell(withIdentifier: EventTableViewCell.cellID, for: indexPath) as! EventTableViewCell
+        let cell = eventsTableView.dequeueReusableCell(withIdentifier: CollectionEventTableViewCell.cellID, for: indexPath) as! CollectionEventTableViewCell
         let event = collection == nil ? viewModel.upcomingEvents[indexPath.row] : collectionEvents[indexPath.row]
         cell.configure(event: event)
         cell.selectionStyle = .none

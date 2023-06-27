@@ -1,14 +1,14 @@
 //
-//  UpcomingViewController.swift
+//  UpcomingEventsViewController.swift
 //  RememberX
 //
-//  Created by Danylo Ternovoi on 13.06.2023.
+//  Created by Danylo Ternovoi on 27.06.2023.
 //
 
 import UIKit
 import Combine
 
-class UpcomingViewController: UIViewController {
+class UpcomingEventsViewController: UIViewController {
     
     
     
@@ -25,7 +25,7 @@ class UpcomingViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = 80
-        tableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCell.cellID)
+        tableView.register(UpcomingEventTableViewCell.self, forCellReuseIdentifier: UpcomingEventTableViewCell.cellID)
         return tableView
     }()
     
@@ -35,6 +35,17 @@ class UpcomingViewController: UIViewController {
         barButtonItem.target = self
         barButtonItem.action = #selector(addNewEventAction)
         return barButtonItem
+    }()
+    
+    private let label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .label
+        label.textAlignment = .center
+        label.backgroundColor = .systemGray5
+        label.font = .systemFont(ofSize: 24, weight: .regular)
+        label.text = "Error"
+        return label
     }()
     
     
@@ -61,20 +72,22 @@ class UpcomingViewController: UIViewController {
     private func setupUI() {
         self.view.addSubview(eventsTableView)
         
-        eventsTableView.dataSource = self
-        eventsTableView.delegate = self
         
         navigationController?.navigationBar.topItem?.title = "Upcoming"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.topItem?.rightBarButtonItem = addEventBarButtonItem
+        
+        eventsTableView.dataSource = self
+        eventsTableView.delegate = self
+        
         view.backgroundColor = .systemBackground
-        eventsTableView.separatorInset = UIEdgeInsets(top: 0, left: 105, bottom: 0, right: 0)
+        eventsTableView.separatorInset = UIEdgeInsets(top: 0, left: 110, bottom: 0, right: 0)
         
         NSLayoutConstraint.activate([
             eventsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             eventsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             eventsTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            eventsTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            eventsTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
     }
     
@@ -91,18 +104,19 @@ class UpcomingViewController: UIViewController {
     // MARK: -  Selectors
     
     @objc func addNewEventAction() {
-        let addUpdateEventNC = UINavigationController(rootViewController: AddUpdateEventViewController(viewModel: viewModel))
+        let addUpdateEventVC = AddUpdateEventViewController(viewModel: viewModel)
+        let addUpdateEventNC = UINavigationController(rootViewController: addUpdateEventVC)
         present(addUpdateEventNC, animated: true)
     }
 }
 
-extension UpcomingViewController: UITableViewDataSource, UITableViewDelegate {
+extension UpcomingEventsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.upcomingEvents.count
+        return viewModel.upcomingEvents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = eventsTableView.dequeueReusableCell(withIdentifier: EventTableViewCell.cellID, for: indexPath) as! EventTableViewCell
+        let cell = eventsTableView.dequeueReusableCell(withIdentifier: UpcomingEventTableViewCell.cellID, for: indexPath) as! UpcomingEventTableViewCell
         let event = viewModel.upcomingEvents[indexPath.row]
         cell.configure(event: event)
         cell.selectionStyle = .none
@@ -111,17 +125,21 @@ extension UpcomingViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let event = viewModel.upcomingEvents[indexPath.row]
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (myContext, myView, complete) in
-            Task {
-                do {
-                    try await self.viewModel.deleteEvent(event)
-                } catch let error {
-                    print(error)
+        
+        if event.collectionName == nil {
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (myContext, myView, complete) in
+                Task {
+                    do {
+                        try await self.viewModel.deleteEvent(event)
+                    } catch let error {
+                        print(error)
+                    }
                 }
             }
+            return UISwipeActionsConfiguration(actions: [deleteAction])
+        } else {
+            return nil
         }
-        
-        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-    
 }
+
