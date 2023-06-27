@@ -35,9 +35,10 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         // Initialize view models
-        let authenticationViewModel = AuthenticationViewModel(authenticationService: authenticationService)
-        let eventsViewModel = EventsViewModel(authService: authenticationService, collectionsService: collectionsService)
-        let collectionsViewModel = CollectionsViewModel(authService: authenticationService, collectionsService: collectionsService)
+        let authenticationVM = AuthenticationViewModel(authenticationService: authenticationService)
+        let eventsVM = EventsViewModel(authService: authenticationService, collectionsService: collectionsService)
+        let collectionsVM = CollectionsViewModel(authService: authenticationService, collectionsService: collectionsService)
+        let manageCollectionsVM = ManageCollectionsViewModel(authService: authenticationService, collectionsService: collectionsService)
         
         // Initialize TabBarItems
         
@@ -54,22 +55,23 @@ class MainTabBarViewController: UITabBarController {
                                              selectedImage: UIImage(systemName: "person.fill"))
         
         // Initialize view controllers
-        let profileViewController = ProfileViewController(viewModel: authenticationViewModel)
-        let collectionsViewController = CollectionsViewController(collectionsViewModel: collectionsViewModel, eventsViewModel: eventsViewModel)
-        let eventsViewController = EventsViewController(eventsViewModel: eventsViewModel)
+        let profileViewController = ProfileViewController(viewModel: authenticationVM)
+        let collectionsViewController = CollectionsViewController(collectionsViewModel: collectionsVM, eventsViewModel: eventsVM, manageCollectionsViewModel: manageCollectionsVM)
+        let upcomingEventsViewController = UpcomingEventsViewController(eventsViewModel: eventsVM)
         
         // Set TabBarItems
         profileViewController.tabBarItem = profileTabBarItem
         collectionsViewController.tabBarItem = collectionsTabBarItem
-        eventsViewController.tabBarItem = upcomingTabBarItem
+        upcomingEventsViewController.tabBarItem = upcomingTabBarItem
         
         
         // Initialize navigation controllers
         let profileNC = UINavigationController(rootViewController: profileViewController)
         let collectionsNC = UINavigationController(rootViewController: collectionsViewController)
-        let eventsNC = UINavigationController(rootViewController: eventsViewController)
+        let upcomingNC = UINavigationController(rootViewController: upcomingEventsViewController)
         
-        self.viewControllers = [collectionsNC, eventsNC, profileNC]
+        self.viewControllers = [collectionsNC, upcomingNC, profileNC]
+        self.selectedIndex = 1
     }
     
     

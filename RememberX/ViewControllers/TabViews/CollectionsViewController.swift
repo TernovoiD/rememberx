@@ -13,6 +13,7 @@ class CollectionsViewController: UIViewController {
     
     
     // MARK: - Variables
+    let manageCollectionsViewModel: ManageCollectionsViewModel
     let collectionsViewModel: CollectionsViewModel
     let eventsViewModel: EventsViewModel
     private var cancellables = Set<AnyCancellable>()
@@ -37,12 +38,21 @@ class CollectionsViewController: UIViewController {
         return barButtonItem
     }()
     
+    private lazy var manageCollectionsBarButtonItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem()
+        barButtonItem.title = "Subscriptions"
+        barButtonItem.target = self
+        barButtonItem.action = #selector(didTapManageButton)
+        return barButtonItem
+    }()
+    
     
     // MARK: -  Lifecycle
     
-    init(collectionsViewModel: CollectionsViewModel, eventsViewModel: EventsViewModel) {
+    init(collectionsViewModel: CollectionsViewModel, eventsViewModel: EventsViewModel, manageCollectionsViewModel: ManageCollectionsViewModel) {
         self.collectionsViewModel = collectionsViewModel
         self.eventsViewModel = eventsViewModel
+        self.manageCollectionsViewModel = manageCollectionsViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -65,7 +75,8 @@ class CollectionsViewController: UIViewController {
         
         navigationController?.navigationBar.topItem?.title = "Collections"
         navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationBar.topItem?.rightBarButtonItem = createCollectionBarButtonItem
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = createCollectionBarButtonItem
+        navigationController?.navigationBar.topItem?.leftBarButtonItem = manageCollectionsBarButtonItem
         view.backgroundColor = .systemBackground
         collectionsTableView.separatorInset = UIEdgeInsets(top: 0, left: 87, bottom: 0, right: 0)
         
@@ -91,8 +102,6 @@ class CollectionsViewController: UIViewController {
     }
     
     private func filterCollections() {
-        
-//        collectionsToShow = collectionsViewModel.collections
         collectionsToShow = collectionsViewModel.collections.filter({ $0.type != CollectionTypeEnum.defaultCollection.rawValue })
     }
     
@@ -101,6 +110,10 @@ class CollectionsViewController: UIViewController {
     @objc func didTapCreateCollectionButton() {
         let addUpdateCollectionNC = UINavigationController(rootViewController: AddUpdateCollectionViewController(viewModel: collectionsViewModel))
         present(addUpdateCollectionNC, animated: true)
+    }
+    
+    @objc func didTapManageButton() {
+        navigationController?.pushViewController(ManageCollectionsViewController(manageCollectionsVM: manageCollectionsViewModel), animated: true)
     }
     
 }
@@ -121,8 +134,8 @@ extension CollectionsViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let collection = collectionsToShow[indexPath.row]
-        let eventsVC = EventsViewController(eventsViewModel: eventsViewModel, collection: collection)
-        navigationController?.pushViewController(eventsVC, animated: true)
+        let collectionEventsVC = CollectionEventsViewController(eventsViewModel: eventsViewModel, collection: collection)
+        navigationController?.pushViewController(collectionEventsVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

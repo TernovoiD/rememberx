@@ -1,19 +1,17 @@
 //
-//  EventTableViewCell.swift
+//  UpcomingEventTableViewCell.swift
 //  RememberX
 //
-//  Created by Danylo Ternovoi on 13.06.2023.
+//  Created by Danylo Ternovoi on 27.06.2023.
 //
 
 import UIKit
 
-class EventTableViewCell: UITableViewCell {
-    
-    
+class UpcomingEventTableViewCell: UITableViewCell {
     
     // MARK: - Variables
     
-    static let cellID = "EventTableViewCell"
+    static let cellID = "UpcomingEventTableViewCell"
     
     
     // MARK: -  UI components
@@ -64,11 +62,14 @@ class EventTableViewCell: UITableViewCell {
         addSubview(infoLabel)
         addSubview(encounter)
         
-        eventLabel.text = event.title
-        infoLabel.text = event.information
+        let date = event.dateTime.formatted(date: .numeric, time: .omitted)
+        infoLabel.text = (event.information ?? "") + " - " + date
+
+        let age = String(event.age)
+        eventLabel.text = event.title + ", " + age
         
         if let text = event.collectionName {
-            collectionNameTag.text = " " + text
+            collectionNameTag.text = " " + text + " "
         } else {
             collectionNameTag.text = ""
         }
@@ -95,7 +96,4 @@ class EventTableViewCell: UITableViewCell {
             infoLabel.trailingAnchor.constraint(equalTo: collectionNameTag.trailingAnchor),
         ])
     }
-    
-    
-    
 }

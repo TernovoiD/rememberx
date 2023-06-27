@@ -78,14 +78,6 @@ class AuthenticationService {
         
     }
     
-//    private func checkIfAuthorized() {
-//        if let _ = authManager.getToken() {
-//            isUserAuthenticated = true
-//        } else {
-//            isUserAuthenticated = false
-//        }
-//    }
-    
     private func createBasicAuthorization(login: String, password: String) -> String {
         let loginString = String(format: "%@:%@", login, password)
         let loginData = loginString.data(using: String.Encoding.utf8)!

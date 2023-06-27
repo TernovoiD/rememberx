@@ -21,9 +21,13 @@ struct CollectionModel: Codable {
     let type: String
     let updatedAt: Date?
     let createdAt: Date?
-    var events: [EventModel]?
+    let events: [EventModel]?
+    let owner: UserModel?
+    let moderators: [UserModel]?
+    let subscribers: [UserModel]?
     
-    init(id: String? = nil, title: String, information: String? = nil, image: String? = nil, type: String, updatedAt: Date? = nil, createdAt: Date? = nil, events: [EventModel]) {
+    
+    init(id: String? = nil, title: String, information: String? = nil, image: String? = nil, type: String, updatedAt: Date? = nil, createdAt: Date? = nil, events: [EventModel], owner: UserModel? = nil, moderators: [UserModel]? = nil, subscribers: [UserModel]? = nil) {
         self.id = id
         self.title = title
         self.information = information
@@ -32,6 +36,9 @@ struct CollectionModel: Codable {
         self.updatedAt = updatedAt
         self.createdAt = createdAt
         self.events = events
+        self.owner = owner
+        self.moderators = moderators
+        self.subscribers = subscribers
     }
     
     func returnEventsWithCollectionName() -> [EventModel] {
@@ -52,19 +59,19 @@ struct CollectionModel: Codable {
     func add(event: EventModel) -> CollectionModel {
         var events = self.events ?? []
         events.append(event)
-        return CollectionModel(id: self.id, title: self.title, information: self.information, image: self.image, type: self.type, updatedAt: self.updatedAt, createdAt: self.createdAt, events: events)
+        return CollectionModel(id: self.id, title: self.title, information: self.information, image: self.image, type: self.type, updatedAt: self.updatedAt, createdAt: self.createdAt, events: events, owner: self.owner, moderators: self.moderators, subscribers: self.subscribers)
     }
     
     func update(event: EventModel) -> CollectionModel {
         var events = self.events ?? []
         events.removeAll(where: { $0.id == event.id })
         events.append(event)
-        return CollectionModel(id: self.id, title: self.title,  information: self.information, image: self.image, type: self.type, updatedAt: self.updatedAt, createdAt: self.createdAt, events: events)
+        return CollectionModel(id: self.id, title: self.title,  information: self.information, image: self.image, type: self.type, updatedAt: self.updatedAt, createdAt: self.createdAt, events: events, owner: self.owner, moderators: self.moderators, subscribers: self.subscribers)
     }
     
     func delete(event: EventModel) -> CollectionModel {
         var events = self.events ?? []
         events.removeAll(where: { $0.id == event.id })
-        return CollectionModel(id: self.id, title: self.title, information: self.information,  image: self.image, type: self.type, updatedAt: self.updatedAt, createdAt: self.createdAt, events: events)
+        return CollectionModel(id: self.id, title: self.title, information: self.information,  image: self.image, type: self.type, updatedAt: self.updatedAt, createdAt: self.createdAt, events: events, owner: self.owner, moderators: self.moderators, subscribers: self.subscribers)
     }
 }

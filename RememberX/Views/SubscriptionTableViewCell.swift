@@ -1,20 +1,20 @@
 //
-//  CollectionTableViewCell.swift
+//  SubscriptionTableViewCell.swift
 //  RememberX
 //
-//  Created by Danylo Ternovoi on 05.06.2023.
+//  Created by Danylo Ternovoi on 26.06.2023.
 //
 
 import UIKit
 
-class CollectionTableViewCell: UITableViewCell {
+class SubscriptionTableViewCell: UITableViewCell {
     
-    static let cellID = "CollectionTableViewCell"
+    static let cellID = "SubscriptionTableViewCell"
     
     private var collectionImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "folder")
+        imageView.image = UIImage(systemName: "photo.circle")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -29,33 +29,35 @@ class CollectionTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let eventsNumberLabel: UILabel = {
+    private let collectionInfoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemGray
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.numberOfLines = 2
         label.text = "Error"
         return label
     }()
     
-    private var arrowImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "chevron.right")
-        imageView.sizeToFit()
-        return imageView
+    lazy var subscribeButton: UIButton = {
+       let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("unsubscribe", for: .normal)
+        button.backgroundColor = .red
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 3
+        return button
     }()
     
     func configure(collection: CollectionModel) {
         collectionTitleLabel.text = collection.title
+        collectionInfoLabel.text = collection.information ?? "No information"
         
         contentView.addSubview(collectionImage)
         contentView.addSubview(collectionTitleLabel)
-        contentView.addSubview(eventsNumberLabel)
-        contentView.addSubview(arrowImageView)
-        
-        eventsNumberLabel.text = defineEventsNumberLabelText(numberOfEvents: collection.events?.count)
+        contentView.addSubview(collectionInfoLabel)
+        contentView.addSubview(subscribeButton)
         
         NSLayoutConstraint.activate([
             
@@ -65,17 +67,17 @@ class CollectionTableViewCell: UITableViewCell {
             collectionImage.widthAnchor.constraint(equalToConstant: 55),
             
             collectionTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            collectionTitleLabel.leadingAnchor.constraint(equalTo: collectionImage.trailingAnchor, constant: 16),
+            collectionTitleLabel.leadingAnchor.constraint(equalTo: collectionImage.trailingAnchor, constant: 5),
             collectionTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            eventsNumberLabel.topAnchor.constraint(equalTo: collectionTitleLabel.bottomAnchor),
-            eventsNumberLabel.leadingAnchor.constraint(equalTo: collectionTitleLabel.leadingAnchor),
-            eventsNumberLabel.trailingAnchor.constraint(equalTo: collectionTitleLabel.trailingAnchor),
+            collectionInfoLabel.topAnchor.constraint(equalTo: collectionTitleLabel.bottomAnchor),
+            collectionInfoLabel.leadingAnchor.constraint(equalTo: collectionTitleLabel.leadingAnchor),
+            collectionInfoLabel.trailingAnchor.constraint(equalTo: collectionTitleLabel.trailingAnchor),
             
-            arrowImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            arrowImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            arrowImageView.heightAnchor.constraint(equalToConstant: 30),
-            arrowImageView.widthAnchor.constraint(equalToConstant: 20)
+            subscribeButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            subscribeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            subscribeButton.heightAnchor.constraint(equalToConstant: 40),
+            subscribeButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 110),
         ])
     }
     
