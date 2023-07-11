@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class ManageCollectionsViewModel {
+class SubscriptionsViewModel {
     private lazy var collectionsChangeSubject = PassthroughSubject<Void, Never>()
     lazy var collectionsChangePublisher = collectionsChangeSubject.eraseToAnyPublisher()
     private var cancellables = Set<AnyCancellable>()
@@ -29,10 +29,16 @@ class ManageCollectionsViewModel {
         collectionsService.$publicCollections
             .receive(on: DispatchQueue.main)
             .sink { loadedCollections in
-                self.collections = loadedCollections
+                let collectionWithUserRelations = self.addUserRelations(toCollections: loadedCollections)
+                self.collections = collectionWithUserRelations.filter({ $0.userRelation == UserRelationToCollection.unknown.rawValue })
                 self.collectionsChangeSubject.send()
             }
             .store(in: &cancellables)
+    }
+    
+    func subscribe(toCollectionWithIndex index: Int) async throws {
+        let collection = collections[index]
+        try await collectionsService.subscribe(toCollection: collection)
     }
     
     func fetchCollections() {
@@ -43,5 +49,15 @@ class ManageCollectionsViewModel {
                 print(error)
             }
         }
+    }
+    
+    private func addUserRelations(toCollections collections: [CollectionModel]) -> [CollectionModel] {
+        var collectionsWithUserRelations: [CollectionModel] = []
+        let user = authService.authenticatedUser
+        
+        for collection in collections {
+            collectionsWithUserRelations.append(collection.addRelations(forUserWithID: user?.id))
+        }
+        return collectionsWithUserRelations
     }
 }

@@ -13,7 +13,7 @@ class CollectionsViewController: UIViewController {
     
     
     // MARK: - Variables
-    let manageCollectionsViewModel: ManageCollectionsViewModel
+    let subscriptionsViewModel: SubscriptionsViewModel
     let collectionsViewModel: CollectionsViewModel
     let eventsViewModel: EventsViewModel
     private var cancellables = Set<AnyCancellable>()
@@ -49,10 +49,10 @@ class CollectionsViewController: UIViewController {
     
     // MARK: -  Lifecycle
     
-    init(collectionsViewModel: CollectionsViewModel, eventsViewModel: EventsViewModel, manageCollectionsViewModel: ManageCollectionsViewModel) {
+    init(collectionsViewModel: CollectionsViewModel, eventsViewModel: EventsViewModel, manageCollectionsViewModel: SubscriptionsViewModel) {
         self.collectionsViewModel = collectionsViewModel
         self.eventsViewModel = eventsViewModel
-        self.manageCollectionsViewModel = manageCollectionsViewModel
+        self.subscriptionsViewModel = manageCollectionsViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -113,7 +113,7 @@ class CollectionsViewController: UIViewController {
     }
     
     @objc func didTapManageButton() {
-        navigationController?.pushViewController(ManageCollectionsViewController(manageCollectionsVM: manageCollectionsViewModel), animated: true)
+        navigationController?.pushViewController(SubscriptionsViewController(manageCollectionsVM: subscriptionsViewModel), animated: true)
     }
     
 }
@@ -140,15 +140,29 @@ extension CollectionsViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let collection = collectionsToShow [indexPath.row]
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (myContext, myView, complete) in
-            Task {
-                do {
-                    try await self.collectionsViewModel.deleteCollection(collection: collection)
-                } catch let error {
-                    print(error)
+        
+        if collection.userRelation == UserRelationToCollection.owner.rawValue {
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (myContext, myView, complete) in
+                Task {
+                    do {
+                        try await self.collectionsViewModel.deleteCollection(collection: collection)
+                    } catch let error {
+                        print(error)
+                    }
                 }
             }
+            return UISwipeActionsConfiguration(actions: [deleteAction])
+        } else {
+            let unsubscribeAction = UIContextualAction(style: .normal, title: "Unsubscribe") { (myContext, myView, complete) in
+                Task {
+                    do {
+                        try await self.collectionsViewModel.unSubscribe(fromCollection: collection)
+                    } catch let error {
+                        print(error)
+                    }
+                }
+            }
+            return UISwipeActionsConfiguration(actions: [unsubscribeAction])
         }
-        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }

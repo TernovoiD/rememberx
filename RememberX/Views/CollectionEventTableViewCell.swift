@@ -43,7 +43,7 @@ class CollectionEventTableViewCell: UITableViewCell {
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 12, weight: .regular)
         label.text = "Error"
         label.layer.cornerRadius = 3
         label.layer.masksToBounds = true

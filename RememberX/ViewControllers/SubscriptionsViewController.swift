@@ -1,5 +1,5 @@
 //
-//  ManageCollectionsViewController.swift
+//  SubscriptionsViewController.swift
 //  RememberX
 //
 //  Created by Danylo Ternovoi on 26.06.2023.
@@ -8,12 +8,12 @@
 import UIKit
 import Combine
 
-class ManageCollectionsViewController: UIViewController {
+class SubscriptionsViewController: UIViewController {
     
     
     
     // MARK: - Variables
-    let manageCollectionsVM: ManageCollectionsViewModel
+    let manageCollectionsVM: SubscriptionsViewModel
     private var cancellables = Set<AnyCancellable>()
     
     
@@ -37,7 +37,7 @@ class ManageCollectionsViewController: UIViewController {
         setupBindings()
     }
     
-    init(manageCollectionsVM: ManageCollectionsViewModel) {
+    init(manageCollectionsVM: SubscriptionsViewModel) {
         self.manageCollectionsVM = manageCollectionsVM
         super.init(nibName: nil, bundle: nil)
         manageCollectionsVM.fetchCollections()
@@ -81,12 +81,18 @@ class ManageCollectionsViewController: UIViewController {
     // MARK: -  Selectors
     
     @objc func didTapSubscribeButton(_ sender: UIButton) {
-        print(sender.tag)
+        Task {
+            do {
+                try await manageCollectionsVM.subscribe(toCollectionWithIndex: sender.tag)
+            } catch let error {
+                print(error)
+            }
+        }
     }
 
 }
 
-extension ManageCollectionsViewController: UITableViewDataSource, UITableViewDelegate {
+extension SubscriptionsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         manageCollectionsVM.collections.count

@@ -19,9 +19,15 @@ class AuthenticationViewController: UIViewController {
     private let headerView = AuthHeaderView(title: "Sign in", subtitle: "Sign in to your account", image: "person.circle")
     private let userEmailField = CustomTextField(fieldType: .email)
     private let userPasswordField = CustomTextField(fieldType: .password)
-    private let signInButton = CustomButton(title: "Sign In", fontSize: .medium)
-    private let createNewAccountButton = CustomButton(title: "Don't have an account? Create", hasBackground: false, fontSize: .small)
-    private let forgotPasswordButton = CustomButton(title: "Forgot password? Reset", hasBackground: false, fontSize: .small)
+    private let signInButton = CustomButton(title: "Sign In", color: .systemBlue, fontSize: .medium, textColor: .white)
+    private let createNewAccountButton = CustomButton(title: "Don't have an account? Create", color: .clear, fontSize: .small, textColor: .systemBlue)
+    private let forgotPasswordButton = CustomButton(title: "Forgot password? Reset", color: .clear, fontSize: .small, textColor: .systemBlue)
+    
+    let alertController: UIAlertController = {
+        let alert = UIAlertController(title: "Title", message: "message", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        return alert
+    }()
     
     
     // MARK: -  Lifecycle
@@ -56,7 +62,7 @@ class AuthenticationViewController: UIViewController {
         self.view.addSubview(createNewAccountButton)
         self.view.addSubview(forgotPasswordButton)
         
-        signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
+        signInButton.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
         createNewAccountButton.addTarget(self, action: #selector(createNewAccountButtonDidTap), for: .touchUpInside)
         forgotPasswordButton.addTarget(self, action: #selector(resetPasswordButtonDidTap), for: .touchUpInside)
         
@@ -101,22 +107,34 @@ class AuthenticationViewController: UIViewController {
     }
     
     @objc func resetPasswordButtonDidTap() {
-        self.navigationController?.pushViewController(PasswordResetViewController(), animated: true)
+        self.navigationController?.pushViewController(PasswordResetViewController(viewModel: authViewModel, alertController: alertController), animated: true)
     }
     
-    @objc func signIn() {
+    @objc func didTapSignInButton() {
         guard let userEmail = userEmailField.text,
-              let userPassword = userPasswordField.text else {
-            print("Error: fields are empty")
+              let userPassword = userPasswordField.text else { return }
+        if userEmail == "" || userPassword == "" {
+            alertController.title = "Error"
+            alertController.message = "Field cannot be empty"
+            self.present(alertController, animated: true)
             return
         }
+        signIn(email: userEmail, password: userPassword)
+    }
+    
+    private func signIn(email: String, password: String) {
         Task {
             do {
-                try await authViewModel.loginUser(withEmail: userEmail, andPassword: userPassword)
+                try await authViewModel.loginUser(withEmail: email, andPassword: password)
+            } catch HTTPError.notAuthorized {
+                alertController.title = "Error"
+                alertController.message = "error.localizedDescription"
+                self.present(alertController, animated: true)
             } catch let error {
-                print("Error: \(error)")
+                alertController.title = "Error"
+                alertController.message = error.localizedDescription
+                self.present(alertController, animated: true)
             }
         }
     }
-    
 }

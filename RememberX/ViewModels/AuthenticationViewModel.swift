@@ -44,6 +44,18 @@ class AuthenticationViewModel {
         }
     }
     
+    func resetPassword(forEmail email: String) async throws {
+        try await authenticationService.resetPassword(onEmail: email)
+    }
+    
+    func deleteUser() async throws {
+        try await authenticationService.deleteAccount()
+    }
+    
+    func changePassword(userPassword: String, newPassword: String, newPasswordConfirm: String) async throws {
+        try await authenticationService.changePassword(userPassword: userPassword, newPassword: newPassword, newPasswordConfirm: newPasswordConfirm)
+    }
+    
     private func setupBindings() {
         authenticationService.$authenticatedUser
             .receive(on: DispatchQueue.main)

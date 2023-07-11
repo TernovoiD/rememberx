@@ -13,14 +13,16 @@ class PasswordResetViewController: UIViewController {
     
     // MARK: - Variables
     
+    let viewModel: AuthenticationViewModel
     
+    let alertController: UIAlertController
     
     // MARK: -  UI components
     
     let headerView = AuthHeaderView(title: "Reset", subtitle: "Reset your account password", image: "lock.circle")
     let userEmailField = CustomTextField(fieldType: .email)
-    let passwordResetButton = CustomButton(title: "Reset password", fontSize: .medium)
-    let signInButton = CustomButton(title: "Remeber your password? Sign In", hasBackground: false, fontSize: .small)
+    let passwordResetButton = CustomButton(title: "Reset password", color: .systemBlue, fontSize: .medium, textColor: .white)
+    let signInButton = CustomButton(title: "Remeber your password? Sign In", color: .clear, fontSize: .small, textColor: .systemBlue)
     
     
     // MARK: -  Lifecycle
@@ -35,6 +37,16 @@ class PasswordResetViewController: UIViewController {
         self.view.addGestureRecognizer(tapGestureBackground)
     }
     
+    init(viewModel: AuthenticationViewModel, alertController: UIAlertController) {
+        self.viewModel = viewModel
+        self.alertController = alertController
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     // MARK: -  UI Setup
     
@@ -46,6 +58,7 @@ class PasswordResetViewController: UIViewController {
         self.view.addSubview(signInButton)
         
         signInButton.addTarget(self, action: #selector(signInButtonDidTap), for: .touchUpInside)
+        passwordResetButton.addTarget(self, action: #selector(didTapPasswordResetButton), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -78,6 +91,20 @@ class PasswordResetViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
-    
+    @objc func didTapPasswordResetButton() {
+        Task {
+            do {
+                try await viewModel.resetPassword(forEmail: userEmailField.text ?? "")
+                navigationController?.popViewController(animated: true)
+            } catch HTTPError.notAuthorized {
+                alertController.title = "Error"
+                alertController.message = "Account with this email doesn't exist."
+                self.present(alertController, animated: true)
+            } catch let error {
+                alertController.title = "Error"
+                alertController.message = error.localizedDescription
+                self.present(alertController, animated: true)
+            }
+        }
+    }
 }

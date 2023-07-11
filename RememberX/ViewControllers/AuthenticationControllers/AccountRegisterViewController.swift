@@ -23,8 +23,8 @@ class AccountRegisterViewController: UIViewController {
     let userEmailField = CustomTextField(fieldType: .email)
     let userPasswordField = CustomTextField(fieldType: .password)
     let userPasswordRepearField = CustomTextField(fieldType: .password)
-    let registerButton = CustomButton(title: "Create account", fontSize: .medium)
-    let signInButton = CustomButton(title: "Already have an account? Sign In", hasBackground: false, fontSize: .small)
+    let registerButton = CustomButton(title: "Create account", color: .systemBlue, fontSize: .medium, textColor: .white)
+    let signInButton = CustomButton(title: "Already have an account? Sign In", color: .clear, fontSize: .small, textColor: .systemBlue)
     
     
     // MARK: -  Lifecycle

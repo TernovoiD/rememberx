@@ -14,10 +14,14 @@ enum BaseRoutes {
 }
 
 enum Endpoints {
+    static let user = "api/v1/user"
+    static let userLogin = "api/v1/login"
+    static let userRegister = "api/v1/register"
     static let userCollections = "api/v1/user/collections"
     static let userEvents = "/events"
-    static let user = "api/v1/user"
+    
+    static let passwordChange = "api/v1/user/password"
+    static let passwordReset = "password-reset"
+    
     static let collections = "api/v1/collections"
-    static let userRegister = "api/v1/register"
-    static let userLogin = "api/v1/login"
 }

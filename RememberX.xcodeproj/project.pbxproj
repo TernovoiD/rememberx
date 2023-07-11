@@ -23,8 +23,9 @@
 		814E881D2A2B2C9E00B37CD0 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E881C2A2B2C9E00B37CD0 /* AuthenticationViewController.swift */; };
 		814F72112A419F030040EFE8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F72102A419F030040EFE8 /* ProfileViewController.swift */; };
 		816DFB3D2A4099EC007639AA /* AddUpdateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816DFB3C2A4099EC007639AA /* AddUpdateCollectionViewController.swift */; };
-		8196767D2A49AA5F00ED8C8D /* ManageCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196767C2A49AA5F00ED8C8D /* ManageCollectionsViewController.swift */; };
-		8196767F2A49B09C00ED8C8D /* ManageCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196767E2A49B09C00ED8C8D /* ManageCollectionsViewModel.swift */; };
+		818B13A52A504327000BEC8F /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818B13A42A504327000BEC8F /* AlertManager.swift */; };
+		8196767D2A49AA5F00ED8C8D /* SubscriptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196767C2A49AA5F00ED8C8D /* SubscriptionsViewController.swift */; };
+		8196767F2A49B09C00ED8C8D /* SubscriptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196767E2A49B09C00ED8C8D /* SubscriptionsViewModel.swift */; };
 		819676812A49BEC400ED8C8D /* SubscriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819676802A49BEC400ED8C8D /* SubscriptionTableViewCell.swift */; };
 		81A2622C2A288BDB0099A15B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2622B2A288BDB0099A15B /* AppDelegate.swift */; };
 		81A2622E2A288BDB0099A15B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2622D2A288BDB0099A15B /* SceneDelegate.swift */; };
@@ -38,10 +39,12 @@
 		81A262582A28B7D60099A15B /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A262572A28B7D60099A15B /* HTTPManager.swift */; };
 		81A2625C2A28BDCA0099A15B /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2625B2A28BDCA0099A15B /* AuthorizationManager.swift */; };
 		81C02EED2A3E340F0005B352 /* AddUpdateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C02EEC2A3E340F0005B352 /* AddUpdateEventViewController.swift */; };
+		81EC947B2A4EFF0B00C6EB82 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EC947A2A4EFF0B00C6EB82 /* ChangePasswordViewController.swift */; };
 		81EEAD722A2C70DF00E76AB9 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EEAD712A2C70DF00E76AB9 /* AuthenticationService.swift */; };
 		81EEAD742A2C720B00E76AB9 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EEAD732A2C720B00E76AB9 /* MainTabBarViewController.swift */; };
 		81EEAD762A2C729100E76AB9 /* JSONDataCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EEAD752A2C729100E76AB9 /* JSONDataCoder.swift */; };
 		81EEAD782A2C75B700E76AB9 /* URLRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EEAD772A2C75B700E76AB9 /* URLRoutes.swift */; };
+		81F8D8D72A4C3F4A00F2FBC7 /* RemoveThanAddExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8D8D62A4C3F4A00F2FBC7 /* RemoveThanAddExtension.swift */; };
 		81FCA3B92A2DC7A600179C34 /* CollectionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FCA3B82A2DC7A600179C34 /* CollectionsService.swift */; };
 		81FCA3BB2A2DCBA900179C34 /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FCA3BA2A2DCBA900179C34 /* CollectionsViewController.swift */; };
 		81FCA3BF2A2DCF4600179C34 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FCA3BE2A2DCF4600179C34 /* CollectionTableViewCell.swift */; };
@@ -65,8 +68,9 @@
 		814E881C2A2B2C9E00B37CD0 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		814F72102A419F030040EFE8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		816DFB3C2A4099EC007639AA /* AddUpdateCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdateCollectionViewController.swift; sourceTree = "<group>"; };
-		8196767C2A49AA5F00ED8C8D /* ManageCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCollectionsViewController.swift; sourceTree = "<group>"; };
-		8196767E2A49B09C00ED8C8D /* ManageCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCollectionsViewModel.swift; sourceTree = "<group>"; };
+		818B13A42A504327000BEC8F /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		8196767C2A49AA5F00ED8C8D /* SubscriptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsViewController.swift; sourceTree = "<group>"; };
+		8196767E2A49B09C00ED8C8D /* SubscriptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsViewModel.swift; sourceTree = "<group>"; };
 		819676802A49BEC400ED8C8D /* SubscriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTableViewCell.swift; sourceTree = "<group>"; };
 		81A262282A288BDB0099A15B /* RememberX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememberX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A2622B2A288BDB0099A15B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,10 +86,12 @@
 		81A262572A28B7D60099A15B /* HTTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
 		81A2625B2A28BDCA0099A15B /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		81C02EEC2A3E340F0005B352 /* AddUpdateEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdateEventViewController.swift; sourceTree = "<group>"; };
+		81EC947A2A4EFF0B00C6EB82 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		81EEAD712A2C70DF00E76AB9 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		81EEAD732A2C720B00E76AB9 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		81EEAD752A2C729100E76AB9 /* JSONDataCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataCoder.swift; sourceTree = "<group>"; };
 		81EEAD772A2C75B700E76AB9 /* URLRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRoutes.swift; sourceTree = "<group>"; };
+		81F8D8D62A4C3F4A00F2FBC7 /* RemoveThanAddExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveThanAddExtension.swift; sourceTree = "<group>"; };
 		81FCA3B82A2DC7A600179C34 /* CollectionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsService.swift; sourceTree = "<group>"; };
 		81FCA3BA2A2DCBA900179C34 /* CollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewController.swift; sourceTree = "<group>"; };
 		81FCA3BE2A2DCF4600179C34 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -110,6 +116,7 @@
 				812C772F2A4B24D80079AC49 /* CollectionsExtension.swift */,
 				812C77312A4B24E50079AC49 /* EventsExtension.swift */,
 				812C77332A4B24F00079AC49 /* SubscriptionsExtension.swift */,
+				81F8D8D62A4C3F4A00F2FBC7 /* RemoveThanAddExtension.swift */,
 			);
 			path = "CollectionService+Extensions";
 			sourceTree = "<group>";
@@ -193,7 +200,7 @@
 			children = (
 				81A262442A2890350099A15B /* AuthenticationViewModel.swift */,
 				81FCA3C02A2DD10000179C34 /* CollectionsViewModel.swift */,
-				8196767E2A49B09C00ED8C8D /* ManageCollectionsViewModel.swift */,
+				8196767E2A49B09C00ED8C8D /* SubscriptionsViewModel.swift */,
 				81A262462A2891420099A15B /* EventsViewModel.swift */,
 			);
 			path = ViewModels;
@@ -203,7 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				81EEAD732A2C720B00E76AB9 /* MainTabBarViewController.swift */,
-				8196767C2A49AA5F00ED8C8D /* ManageCollectionsViewController.swift */,
+				8196767C2A49AA5F00ED8C8D /* SubscriptionsViewController.swift */,
 				81C02EEF2A3E34390005B352 /* TabViews */,
 				814E881E2A2B2CC800B37CD0 /* AuthenticationControllers */,
 				81C02EF02A3E34510005B352 /* SupportingViewControllers */,
@@ -229,6 +236,7 @@
 				81A2625B2A28BDCA0099A15B /* AuthorizationManager.swift */,
 				81A262572A28B7D60099A15B /* HTTPManager.swift */,
 				81EEAD752A2C729100E76AB9 /* JSONDataCoder.swift */,
+				818B13A42A504327000BEC8F /* AlertManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -237,8 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				81FCA3BA2A2DCBA900179C34 /* CollectionsViewController.swift */,
-				814F72102A419F030040EFE8 /* ProfileViewController.swift */,
 				812C77262A4AFD3C0079AC49 /* UpcomingEventsViewController.swift */,
+				814F72102A419F030040EFE8 /* ProfileViewController.swift */,
 			);
 			path = TabViews;
 			sourceTree = "<group>";
@@ -249,6 +257,7 @@
 				816DFB3C2A4099EC007639AA /* AddUpdateCollectionViewController.swift */,
 				81C02EEC2A3E340F0005B352 /* AddUpdateEventViewController.swift */,
 				812C77282A4AFD500079AC49 /* CollectionEventsViewController.swift */,
+				81EC947A2A4EFF0B00C6EB82 /* ChangePasswordViewController.swift */,
 			);
 			path = SupportingViewControllers;
 			sourceTree = "<group>";
@@ -338,7 +347,8 @@
 				814E88192A2B2C4500B37CD0 /* PasswordResetViewController.swift in Sources */,
 				812C77302A4B24D80079AC49 /* CollectionsExtension.swift in Sources */,
 				81EEAD742A2C720B00E76AB9 /* MainTabBarViewController.swift in Sources */,
-				8196767D2A49AA5F00ED8C8D /* ManageCollectionsViewController.swift in Sources */,
+				81EC947B2A4EFF0B00C6EB82 /* ChangePasswordViewController.swift in Sources */,
+				8196767D2A49AA5F00ED8C8D /* SubscriptionsViewController.swift in Sources */,
 				81A262472A2891420099A15B /* EventsViewModel.swift in Sources */,
 				81A2624B2A28918A0099A15B /* UserModel.swift in Sources */,
 				81103E2F2A4866F500BD51D9 /* DaysEncounterStackView.swift in Sources */,
@@ -346,6 +356,7 @@
 				816DFB3D2A4099EC007639AA /* AddUpdateCollectionViewController.swift in Sources */,
 				814E881B2A2B2C8A00B37CD0 /* AccountRegisterViewController.swift in Sources */,
 				812C772D2A4AFE150079AC49 /* CollectionEventTableViewCell.swift in Sources */,
+				81F8D8D72A4C3F4A00F2FBC7 /* RemoveThanAddExtension.swift in Sources */,
 				81FCA3C12A2DD10000179C34 /* CollectionsViewModel.swift in Sources */,
 				81A262452A2890350099A15B /* AuthenticationViewModel.swift in Sources */,
 				814F72112A419F030040EFE8 /* ProfileViewController.swift in Sources */,
@@ -362,13 +373,14 @@
 				81A262492A28917D0099A15B /* EventModel.swift in Sources */,
 				812C77342A4B24F00079AC49 /* SubscriptionsExtension.swift in Sources */,
 				814E88172A2B28DC00B37CD0 /* CustomButton.swift in Sources */,
+				818B13A52A504327000BEC8F /* AlertManager.swift in Sources */,
 				81A2622E2A288BDB0099A15B /* SceneDelegate.swift in Sources */,
 				81EEAD722A2C70DF00E76AB9 /* AuthenticationService.swift in Sources */,
 				812C77292A4AFD500079AC49 /* CollectionEventsViewController.swift in Sources */,
 				812C77272A4AFD3C0079AC49 /* UpcomingEventsViewController.swift in Sources */,
 				81EEAD762A2C729100E76AB9 /* JSONDataCoder.swift in Sources */,
 				819676812A49BEC400ED8C8D /* SubscriptionTableViewCell.swift in Sources */,
-				8196767F2A49B09C00ED8C8D /* ManageCollectionsViewModel.swift in Sources */,
+				8196767F2A49B09C00ED8C8D /* SubscriptionsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

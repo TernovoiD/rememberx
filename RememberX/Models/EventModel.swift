@@ -7,14 +7,6 @@
 
 import Foundation
 
-enum TimerEnum: String, CaseIterable {
-    case never
-    case daily
-    case weekly
-    case monthly
-    case yearly
-}
-
 enum EventType: String, CaseIterable {
     case event
     case anniversary

@@ -37,8 +37,34 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
+    private lazy var signOutBarButtonItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem()
+        barButtonItem.title = "Log out"
+        barButtonItem.target = self
+        barButtonItem.action = #selector(signOut)
+        return barButtonItem
+    }()
     
-    let signOutButton = CustomButton(title: "Sign Out", fontSize: .medium)
+    let changePasswordButton = CustomButton(title: "Change password", color: .systemBlue, fontSize: .medium, textColor: .white)
+    let deleteAccountButton = CustomButton(title: "Delete account", color: .systemRed, fontSize: .medium, textColor: .white)
+    
+    private lazy var accountDeleteAlert: UIAlertController = {
+        let alert = UIAlertController(
+            title: "Are you sure you want to delete your account?",
+            message: "This action will permanently delete your account and the collections you've created. This action cannot be undone.",
+            preferredStyle: .actionSheet
+        )
+        alert.addAction(UIAlertAction(
+            title: "DELETE",
+            style: .destructive,
+            handler: { _ in
+                self.deleteAccount()
+            }))
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel))
+        return alert
+    }()
     
     
     // MARK: -  Lifecycle
@@ -66,11 +92,15 @@ class ProfileViewController: UIViewController {
     private func setupUI() {
         self.view.addSubview(profileImage)
         self.view.addSubview(usernameLabel)
-        self.view.addSubview(signOutButton)
+        self.view.addSubview(changePasswordButton)
+        self.view.addSubview(deleteAccountButton)
         
         view.backgroundColor = .systemBackground
         
-        signOutButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = signOutBarButtonItem
+        
+        changePasswordButton.addTarget(self, action: #selector(showChangePasswordVC), for: .touchUpInside)
+        deleteAccountButton.addTarget(self, action: #selector(deleteAccountAlert), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             
@@ -83,10 +113,15 @@ class ProfileViewController: UIViewController {
             usernameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             usernameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            signOutButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            signOutButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            signOutButton.heightAnchor.constraint(equalToConstant: 50),
-            signOutButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9),
+            changePasswordButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            changePasswordButton.bottomAnchor.constraint(equalTo: deleteAccountButton.topAnchor, constant: -16),
+            changePasswordButton.heightAnchor.constraint(equalToConstant: 50),
+            changePasswordButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9),
+            
+            deleteAccountButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            deleteAccountButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            deleteAccountButton.heightAnchor.constraint(equalToConstant: 50),
+            deleteAccountButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.9),
         ])
     }
     
@@ -106,6 +141,21 @@ class ProfileViewController: UIViewController {
         viewModel.signOut()
     }
     
+    @objc func deleteAccountAlert() {
+        present(accountDeleteAlert, animated: true)
+    }
     
+    @objc func showChangePasswordVC() {
+        navigationController?.pushViewController(ChangePasswordViewController(viewModel: viewModel), animated: true)
+    }
     
+    func deleteAccount() {
+        Task {
+            do {
+                try await viewModel.deleteUser()
+            } catch let error {
+                print(error)
+            }
+        }
+    }
 }

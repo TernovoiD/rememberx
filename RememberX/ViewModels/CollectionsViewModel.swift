@@ -35,14 +35,29 @@ class CollectionsViewModel {
         try await collectionsService.deleteCollection(collection)
     }
     
+    func unSubscribe(fromCollection collection: CollectionModel) async throws {
+        try await collectionsService.unSubscribe(fromCollection: collection)
+    }
+    
     private func setupBindings() {
         collectionsService.$userCollections
             .receive(on: DispatchQueue.main)
             .sink { loadedCollections in
-                self.collections = loadedCollections
+                let collectionWithUserRelations = self.addUserRelations(toCollections: loadedCollections)
+                self.collections = collectionWithUserRelations
                 self.collectionsChangeSubject.send()
             }
             .store(in: &cancellables)
+    }
+    
+    private func addUserRelations(toCollections collections: [CollectionModel]) -> [CollectionModel] {
+        var collectionsWithUserRelations: [CollectionModel] = []
+        let user = authService.authenticatedUser
+        
+        for collection in collections {
+            collectionsWithUserRelations.append(collection.addRelations(forUserWithID: user?.id))
+        }
+        return collectionsWithUserRelations
     }
     
 }

@@ -15,13 +15,14 @@ class CustomButton: UIButton {
         case small
     }
     
-    init(title: String, hasBackground: Bool = true, fontSize: FontSize) {
+    init(title: String, color: UIColor, fontSize: FontSize, textColor: UIColor) {
         super.init(frame: .zero)
         
-        self.translatesAutoresizingMaskIntoConstraints = false
+        
         self.setTitle(title, for: .normal)
-        self.backgroundColor = hasBackground ? .systemBlue : .clear
-        self.setTitleColor(hasBackground ? .white : .systemBlue, for: .normal)
+        self.setTitleColor(textColor, for: .normal)
+        self.backgroundColor = color
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 8
         
         switch fontSize {

@@ -25,6 +25,7 @@ class MainTabBarViewController: UITabBarController {
         self.collectionsService = collectionsService
         super.init(nibName: nil, bundle: nil)
         setupBindings()
+        fetchUser()
     }
     
     required init?(coder: NSCoder) {
@@ -38,7 +39,7 @@ class MainTabBarViewController: UITabBarController {
         let authenticationVM = AuthenticationViewModel(authenticationService: authenticationService)
         let eventsVM = EventsViewModel(authService: authenticationService, collectionsService: collectionsService)
         let collectionsVM = CollectionsViewModel(authService: authenticationService, collectionsService: collectionsService)
-        let manageCollectionsVM = ManageCollectionsViewModel(authService: authenticationService, collectionsService: collectionsService)
+        let manageCollectionsVM = SubscriptionsViewModel(authService: authenticationService, collectionsService: collectionsService)
         
         // Initialize TabBarItems
         
@@ -71,14 +72,7 @@ class MainTabBarViewController: UITabBarController {
         let upcomingNC = UINavigationController(rootViewController: upcomingEventsViewController)
         
         self.viewControllers = [collectionsNC, upcomingNC, profileNC]
-        self.selectedIndex = 1
-    }
-    
-    
-    // MARK: - Functions
-    
-    private func setupBindings() {
-        authenticationService.$authenticatedUser
+        self.selectedIndex = 1 uthenticationService.$authenticatedUser
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 self.checkUserAuthenticationStatus()
@@ -95,7 +89,7 @@ class MainTabBarViewController: UITabBarController {
                 do {
                     try await collectionsService.fetchUserCollections()
                 } catch let error {
-                    print(error.localizedDescription)
+                    AlertManager.showAlert(onViewController: self, withTitle: "error", andMassage: error.localizedDescription)
                 }
             }
         }
@@ -122,6 +116,16 @@ class MainTabBarViewController: UITabBarController {
     private func hideAuthenticationViewController() {
         if let authenticationNavigationController {
             authenticationNavigationController.dismiss(animated: true)
+        }
+    }
+    
+    func fetchUser() {
+        Task {
+            do {
+                try await authenticationService.fetchUser()
+            } catch let error {
+                print(error)
+            }
         }
     }
 }

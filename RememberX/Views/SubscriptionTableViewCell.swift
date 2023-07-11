@@ -43,9 +43,9 @@ class SubscriptionTableViewCell: UITableViewCell {
     lazy var subscribeButton: UIButton = {
        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("unsubscribe", for: .normal)
-        button.backgroundColor = .red
+        button.setTitle("Subscribe", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .red
         button.layer.cornerRadius = 3
         return button
     }()

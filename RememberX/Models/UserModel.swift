@@ -15,6 +15,8 @@ struct UserModel: Codable {
     let email: String?
     let password: String?
     let confirmPassword: String?
+    let newPassword: String?
+    let newPasswordConfirm: String?
     
     init(id: String? = nil,
          username: String? = nil,
@@ -22,7 +24,9 @@ struct UserModel: Codable {
          createdAt: Date? = nil,
          email: String? = nil,
          password: String? = nil,
-         confirmPassword: String? = nil) {
+         confirmPassword: String? = nil,
+         newPassword: String? = nil,
+         newPasswordConfirm: String? = nil) {
         self.id = id
         self.username = username
         self.updatedAt = updatedAt
@@ -30,6 +34,8 @@ struct UserModel: Codable {
         self.email = email
         self.password = password
         self.confirmPassword = confirmPassword
+        self.newPassword = newPassword
+        self.newPasswordConfirm = newPasswordConfirm
     }
     
 }

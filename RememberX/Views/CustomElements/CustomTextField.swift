@@ -13,6 +13,7 @@ class CustomTextField: UITextField {
         case username
         case email
         case password
+        case newPassword
         case title
     }
     
@@ -28,7 +29,6 @@ class CustomTextField: UITextField {
         self.returnKeyType = .done
         self.autocorrectionType = .no
         self.autocapitalizationType = fieldType == .title ? .sentences : .none
-        self.isSecureTextEntry = fieldType == .password ? true : false
         self.keyboardType = fieldType == .email ? .emailAddress : .default
         self.leftViewMode = .always
         self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: self.frame.size.height))
@@ -40,6 +40,10 @@ class CustomTextField: UITextField {
             self.placeholder = "Email"
         case .password:
             self.placeholder = "Password"
+            self.isSecureTextEntry = true
+        case .newPassword:
+            self.placeholder = "New password"
+            self.isSecureTextEntry = true
         case .title:
             self.placeholder = "Title"
         }
